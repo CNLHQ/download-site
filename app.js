@@ -1,4 +1,4 @@
-/* 资源下载站（GitHub 版） - 前台逻辑 */
+/* CNLHQ's Server - 前台逻辑 */
 (function () {
   'use strict';
 
@@ -202,9 +202,10 @@
     if (c.subtitle) $('#site-subtitle').textContent = c.subtitle;
     if (c.footer) $('#footer-text').textContent = c.footer;
     if (c.uploadGuide) $('#guide-link').href = c.uploadGuide;
+    if (c.name) { const t = document.querySelector('#hero-title span'); if (t) t.textContent = c.name; }
 
-    let theme = 'dark';
-    try { theme = localStorage.getItem('rs_theme') || 'dark'; } catch (e) {}
+    let theme = 'light';
+    try { theme = localStorage.getItem('rs_theme') || 'light'; } catch (e) {}
     document.documentElement.dataset.theme = theme;
 
     const q = new URLSearchParams(location.search).get('q');
