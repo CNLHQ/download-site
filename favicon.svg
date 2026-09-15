@@ -2,13 +2,19 @@
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#6366f1"/>
-      <stop offset="1" stop-color="#22d3ee"/>
+      <stop offset=".5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".96"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".8"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="url(#g)"/>
-  <g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M44 22a10 10 0 0 0-19.6-3A8.5 8.5 0 0 0 22 31.5h22A7 7 0 0 0 44 22z"/>
-    <path d="M32 33v14"/>
-    <path d="m25 40 7-7 7 7"/>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#ffffff" stroke-opacity=".18"/>
+  <g fill="none" stroke="url(#s)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M44 26a11 11 0 0 0-21.4-3.2A9.3 9.3 0 0 0 22 41h21a7.6 7.6 0 0 0 1-15.1"/>
+    <path d="M32 36v15"/>
+    <path d="m25 44 7-7 7 7"/>
   </g>
 </svg>
