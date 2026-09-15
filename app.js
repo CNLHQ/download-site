@@ -37,22 +37,40 @@
     return m ? m[1].toLowerCase() : '';
   }
 
+  const ICONS = {
+    archive: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z"/><path d="M5 8l1.6-3.2A2 2 0 0 1 8.4 3.6h7.2a2 2 0 0 1 1.8 1.2L19 8"/><path d="M12 11v6"/><rect x="10.8" y="16" width="2.4" height="2.4" rx=".4"/></svg>',
+    app: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><circle cx="6" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="8.6" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>',
+    disk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="6.2" r=".8" fill="currentColor" stroke="none"/></svg>',
+    doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/><path d="M8 13h7M8 16h5"/></svg>',
+    sheet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M10 3v18M4 15h6M14 15h6"/></svg>',
+    text: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/><path d="M8 13h7M8 16h5"/></svg>',
+    audio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6.5l8-2v10"/><circle cx="6.5" cy="18" r="2.2"/><circle cx="14.5" cy="16.5" r="2.2"/></svg>',
+    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10.5 9.2v5.6l5-2.8z" fill="currentColor" stroke="none"/></svg>',
+    image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8" cy="10" r="1.6"/><path d="M4 17l4.5-3.5L13 17l3.5-3.5L20 17"/></svg>',
+    code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg>',
+    box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></svg>',
+  };
+  const CAT = {
+    zip: 'archive', rar: 'archive', '7z': 'archive', tar: 'archive', gz: 'archive',
+    exe: 'app', msi: 'app', appx: 'app', apk: 'app', ipa: 'app',
+    iso: 'disk', img: 'disk', dmg: 'disk',
+    pdf: 'doc', doc: 'doc', docx: 'doc',
+    xls: 'sheet', xlsx: 'sheet', ppt: 'sheet', pptx: 'sheet', csv: 'sheet',
+    txt: 'text', md: 'text', log: 'text',
+    mp3: 'audio', wav: 'audio', flac: 'audio', aac: 'audio',
+    mp4: 'video', mkv: 'video', avi: 'video', mov: 'video', webm: 'video',
+    jpg: 'image', jpeg: 'image', png: 'image', gif: 'image', webp: 'image', svg: 'image', bmp: 'image',
+    js: 'code', ts: 'code', py: 'code', json: 'code', html: 'code', css: 'code', sh: 'code',
+  };
+  const TINT = {
+    archive: '#f59e0b', app: '#64748b', disk: '#a78bfa', doc: '#60a5fa', sheet: '#34d399',
+    text: '#94a3b8', audio: '#f472b6', video: '#f43f5e', image: '#22d3ee', code: '#facc15', box: '#6366f1',
+  };
+
   function iconFor(name) {
     const ext = extOf(name);
-    const map = {
-      zip: ['🗜️', '#f59e0b'], rar: ['🗜️', '#f59e0b'], '7z': ['🗜️', '#f59e0b'], tar: ['🗜️', '#f59e0b'], gz: ['🗜️', '#f59e0b'],
-      exe: ['⚙️', '#94a3b8'], msi: ['⚙️', '#94a3b8'], appx: ['⚙️', '#94a3b8'],
-      apk: ['📱', '#34d399'], ipa: ['📱', '#34d399'],
-      iso: ['💿', '#a78bfa'], img: ['💿', '#a78bfa'], dmg: ['💿', '#a78bfa'],
-      pdf: ['📄', '#f87171'], doc: ['📄', '#60a5fa'], docx: ['📄', '#60a5fa'], xls: ['📊', '#34d399'], xlsx: ['📊', '#34d399'], ppt: ['📊', '#fb923c'], pptx: ['📊', '#fb923c'],
-      txt: ['📝', '#e2e8f0'], md: ['📝', '#e2e8f0'], log: ['📝', '#e2e8f0'],
-      mp3: ['🎵', '#f472b6'], wav: ['🎵', '#f472b6'], flac: ['🎵', '#f472b6'], aac: ['🎵', '#f472b6'],
-      mp4: ['🎬', '#f43f5e'], mkv: ['🎬', '#f43f5e'], avi: ['🎬', '#f43f5e'], mov: ['🎬', '#f43f5e'], webm: ['🎬', '#f43f5e'],
-      jpg: ['🖼️', '#22d3ee'], jpeg: ['🖼️', '#22d3ee'], png: ['🖼️', '#22d3ee'], gif: ['🖼️', '#22d3ee'], webp: ['🖼️', '#22d3ee'], svg: ['🖼️', '#22d3ee'], bmp: ['🖼️', '#22d3ee'],
-      js: ['🧑‍💻', '#facc15'], ts: ['🧑‍💻', '#facc15'], py: ['🧑‍💻', '#facc15'], json: ['🧑‍💻', '#facc15'], html: ['🧑‍💻', '#facc15'], css: ['🧑‍💻', '#facc15'], sh: ['🧑‍💻', '#facc15'],
-      csv: ['📊', '#34d399'],
-    };
-    return map[ext] || ['📦', '#6366f1'];
+    const cat = CAT[ext] || 'box';
+    return [ICONS[cat], TINT[cat]];
   }
 
   const viewable = new Set(['txt', 'md', 'log', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'mp4', 'webm', 'mp3', 'wav', 'json', 'csv', 'html', 'js', 'css', 'py', 'ts']);
@@ -106,13 +124,13 @@
     grid.hidden = false;
 
     grid.innerHTML = list.map((it) => {
-      const [emoji, tint] = iconFor(it.name);
+      const [icon, tint] = iconFor(it.name);
       const abs = it.url;
       const canView = viewable.has(extOf(it.name));
       return `
         <article class="card">
           <div class="card-top">
-            <div class="file-icon" style="--tint:${tint}">${emoji}</div>
+            <div class="file-icon" style="--tint:${tint}">${icon}</div>
             <div class="file-meta">
               <h3 title="${it.name.replace(/"/g, '&quot;')}">${it.name}</h3>
               <div class="meta-line">${fmtSize(it.size)} · ${fmtDate(it.date)}</div>
